@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v={{ version }}">
 </head>
 <body>
 
@@ -28,13 +28,12 @@
         <button id="load-button">Videó és Felirat Betöltése</button>
         
         <div class="player-container">
-            <video id="player" playsinline controls>
-                </video>
+            <video id="player" playsinline controls></video>
         </div>
     </div>
     
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}?v={{ version }}"></script>
 </body>
 </html>
