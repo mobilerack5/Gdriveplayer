@@ -1,48 +1,24 @@
 # app.py
-from flask import Flask, render_template, Response
+from flask import Flask, render_template
 import os
+import time # Ezt adjuk hozzá
 
 # Inicializáljuk a Flask alkalmazást
 app = Flask(__name__)
 
+# Létrehozunk egy "verzió" számot az aktuális időbélyegből.
+# Ez minden szerver újraindításkor más lesz.
+# pl.: 1678886400
+APP_VERSION = str(int(time.time()))
+
 @app.route('/')
 def index():
-    """ Főoldal betöltése """
-    return render_template('index.html')
-
-
-@app.route('/debug-js')
-def debug_js():
     """
-    DEBUG ÚTVONAL:
-    Megpróbáljuk beolvasni a static/script.js fájlt a szerverről
-    és kiírni a tartalmát.
+    Ez a fő útvonal.
+    Betölti az 'index.html'-t, és átadja neki
+    a 'version' változót a cache-bustinghoz.
     """
-    # A fájl teljes elérési útjának lekérdezése a szerveren
-    file_path = os.path.join(app.root_path, 'static', 'script.js')
-    content = ""
-    status = ""
-    
-    try:
-        # Megpróbáljuk kiolvasni a fájl tartalmát
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        if not content:
-            status = f"FÁJL SIKERESEN BEOLVASVA, DE ÜRES VOLT. (0 bájt)"
-        else:
-            status = f"FÁJL SIKERESEN BEOLVASVA (méret: {len(content)} bájt):"
-            
-    except FileNotFoundError:
-        status = f"HIBA: A FÁJL NEM TALÁLHATÓ A VÁRT HELYEN!"
-        content = f"Várt útvonal: {file_path}"
-    except Exception as e:
-        status = f"ÁLTALÁNOS HIBA A FÁJL OLVASÁSAKOR:"
-        content = str(e)
-
-    # Visszaadjuk a tartalmat sima szövegként (<pre> a formázás megtartásához)
-    return Response(f"--- DEBUG SCRIPT.JS ---\n\n{status}\n\n--- TARTALOM ---\n{content}", mimetype='text/plain')
-
+    return render_template('index.html', version=APP_VERSION)
 
 if __name__ == '__main__':
     # A host='0.0.0.0' kulcsfontosságú
