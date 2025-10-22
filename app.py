@@ -19,6 +19,4 @@ if __name__ == '__main__':
     indítod a szkriptet (helyi teszteléshez).
     A Render egy 'gunicorn' nevű programot fog használni helyette.
     """
-    # A host='0.0.0.0' kulcsfontosságú a Codespace-ben, hogy külsőleg is elérhető legyen!
-    # A port=5000 egy gyakori alapértelmezett.
     app.run(debug=True, host='0.0.0.0', port=5000)
