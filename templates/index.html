@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDrive Videó Lejátszó</title>
+    
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>GDrive Videó Lejátszó</h1>
+        <p>Illeszd be a "Bárki, aki a link birtokában van" típusú megosztási linkeket.</p>
+        
+        <div class="input-group">
+            <label for="video-link">Videó Megosztási Link:</label>
+            <input type="text" id="video-link" placeholder="https://drive.google.com/file/d/...">
+        </div>
+        
+        <div class="input-group">
+            <label for="subtitle-link">Felirat Megosztási Link (SRT vagy VTT):</label>
+            <input type="text" id="subtitle-link" placeholder="https://drive.google.com/file/d/...">
+        </div>
+        
+        <button id="load-button">Videó és Felirat Betöltése</button>
+        
+        <div class="player-container">
+            <video id="player" playsinline controls>
+                </video>
+        </div>
+    </div>
+    
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
